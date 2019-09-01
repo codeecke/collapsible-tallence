@@ -1,0 +1,50 @@
+@import "~Base/Styles/Variables/colors";
+
+.collapsible {
+  max-width: 267px; /* to get the same line-breaks as the layout defines */
+  border-radius: 9px;
+  overflow: hidden;
+
+  &__title {
+    position: relative;
+    font-weight: 600;
+    color: $color-white;
+    background-color: $color-green;
+    padding: 10px 15px;
+    border-radius: 9px 9px 0 0;
+    cursor: pointer;
+
+    &:after {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      width: 20px;
+      height: 20px;
+      content: "";
+      display: block;
+      background-image: url("../Assets/icon-carret.svg");
+      transform: rotate(180deg);
+      transition: transform 300ms ease-in-out;
+    }
+  }
+
+  &__content {
+    padding: 20px 10px;
+    background-color: $color-white;
+    border-radius: 0 0 9px 9px;
+    border: 1px solid $color-grey;
+    border-top: none;
+  }
+
+  &__content-wrapper {
+    overflow: hidden;
+    height: 0;
+    transition: height 300ms ease-in-out;
+  }
+
+  &--open {
+    .collapsible__title:after {
+      transform: rotate(0);
+    }
+  }
+}

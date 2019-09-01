@@ -1,0 +1,11 @@
+@import "Variables/colors";
+
+html, body {
+  background-color: $color-grey-light;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+}
