@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "outDir": "./dist/",
-      "sourceMap": true,
+      "sourceMap": false,
       "downlevelIteration": true,
       "allowSyntheticDefaultImports": true,
       "noImplicitAny": true,

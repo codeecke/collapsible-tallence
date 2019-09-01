@@ -6,7 +6,6 @@ const
 module.exports = {
 
     entry: path.resolve(__dirname, './src/Base/main.ts'),
-    devtool: 'inline-source-map',
 
     mode: 'production',
 
