@@ -3,9 +3,9 @@ export class Collapsible {
     private readonly title: HTMLElement;
     private readonly contentWrapper: HTMLElement;
     private readonly content: HTMLElement;
-    private isOpen: boolean = false;
     private readonly openClass = 'collapsible--open';
     private readonly closeClass = 'collapsible--close';
+    private isOpen: boolean = false;
 
     constructor(collapsible: HTMLElement) {
         this.mainElement = collapsible;
@@ -17,10 +17,7 @@ export class Collapsible {
             throw new Error('Invalid collapsible! A collapsible needs a title-, contentWrapper- and content-element!');
         }
 
-        if(collapsible.classList.contains(this.openClass)) {
-            this.open();
-        }
-
+        this.isOpen = collapsible.classList.contains(this.openClass);
         this.title.addEventListener('click', () => this.toggle());
         this.contentWrapper.addEventListener('transitionend', () => this.ontransitionend());
     }
@@ -36,11 +33,11 @@ export class Collapsible {
         // I had to set the height from auto to a px-value before we can start the animation
         this.open();
         setTimeout(() => {
-            this.contentWrapper.style.height = null;
+            this.contentWrapper.style.height = '0';
             this.mainElement.classList.remove(this.openClass);
             this.mainElement.classList.add(this.closeClass);
             this.isOpen = false;
-        });
+        },50);
     }
 
     toggle(): void {
@@ -50,7 +47,7 @@ export class Collapsible {
     ontransitionend(): void {
         if (this.isOpen) {
             // I set the height to auto to keep the responsiveness
-            this.contentWrapper.style.height = null;
+            this.contentWrapper.style.height = 'auto';
         }
     }
 }
