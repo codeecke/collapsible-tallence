@@ -4,6 +4,8 @@ export class Collapsible {
     private readonly contentWrapper: HTMLElement;
     private readonly content: HTMLElement;
     private isOpen: boolean = false;
+    private readonly openClass = 'collapsible--open';
+    private readonly closeClass = 'collapsible--close';
 
     constructor(collapsible: HTMLElement) {
         this.mainElement = collapsible;
@@ -15,14 +17,18 @@ export class Collapsible {
             throw new Error('Invalid collapsible! A collapsible needs a title-, contentWrapper- and content-element!');
         }
 
+        if(collapsible.classList.contains(this.openClass)) {
+            this.open();
+        }
+
         this.title.addEventListener('click', () => this.toggle());
         this.contentWrapper.addEventListener('transitionend', () => this.ontransitionend());
     }
 
     open(): void {
         this.contentWrapper.style.height = this.content.offsetHeight + 'px';
-        this.mainElement.classList.remove('collapsible--close');
-        this.mainElement.classList.add('collapsible--open');
+        this.mainElement.classList.remove(this.closeClass);
+        this.mainElement.classList.add(this.openClass);
         this.isOpen = true;
     }
 
@@ -30,9 +36,9 @@ export class Collapsible {
         // I had to set the height from auto to a px-value before we can start the animation
         this.open();
         setTimeout(() => {
-            this.contentWrapper.style.height = '0';
-            this.mainElement.classList.remove('collapsible--open');
-            this.mainElement.classList.add('collapsible--close');
+            this.contentWrapper.style.height = null;
+            this.mainElement.classList.remove(this.openClass);
+            this.mainElement.classList.add(this.closeClass);
             this.isOpen = false;
         });
     }
@@ -44,7 +50,7 @@ export class Collapsible {
     ontransitionend(): void {
         if (this.isOpen) {
             // I set the height to auto to keep the responsiveness
-            this.contentWrapper.style.height = 'auto';
+            this.contentWrapper.style.height = null;
         }
     }
 }

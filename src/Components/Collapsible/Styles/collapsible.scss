@@ -43,8 +43,21 @@
   }
 
   &--open {
-    .collapsible__title:after {
-      transform: rotate(0);
+    .collapsible {
+      &__title:after {
+        transform: rotate(0);
+      }
+      &__content-wrapper {
+        height: auto;
+      }
+    }
+  }
+
+  &--close {
+    .collapsible {
+      &__content-wrapper {
+        height: 0;
+      }
     }
   }
 }
